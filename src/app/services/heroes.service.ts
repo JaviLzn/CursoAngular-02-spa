@@ -1,13 +1,5 @@
 import { Injectable } from '@angular/core';
 
-export interface Heroe {
-    nombre: string;
-    bio: string;
-    img: string;
-    aparicion: string;
-    casa: string;
-}
-
 @Injectable()
 export class HeroesService {
 
@@ -76,4 +68,25 @@ export class HeroesService {
      getHeroe ( idx: string ): Heroe[] {
        return this.heroes[idx];
      }
+
+     buscarHeroes ( texto: string ): Heroe[] {
+       const heroesArr: Heroe[] = [];
+       texto = texto.toLocaleLowerCase();
+
+       for ( const heroe of this.heroes) {
+        const nombre = heroe.nombre.toLocaleLowerCase();
+         if ( nombre.indexOf(texto) >= 0) {
+           heroesArr.push ( heroe );
+         }
+       }
+       return heroesArr;
+     }
+}
+
+export interface Heroe {
+  nombre: string;
+  bio: string;
+  img: string;
+  aparicion: string;
+  casa: string;
 }
